@@ -37,6 +37,10 @@ jobs:
             export NEXT_PUBLIC_BASE_PATH="/$REPO_NAME"
           fi
           pnpm build
+          if [[ -n "$NEXT_PUBLIC_BASE_PATH" ]]; then
+            mkdir -p dist/client/_next
+            cp -R "dist/client/$REPO_NAME/_next/." dist/client/_next/
+          fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/client
